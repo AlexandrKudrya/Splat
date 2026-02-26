@@ -11,5 +11,6 @@
 | `.env.example` | Шаблон переменных окружения — скопировать в `.env` и заполнить |
 | `README.md` | Обзор проекта и быстрый старт |
 | `CLAUDE.md` | Правила работы с кодом для Claude Code |
-| `SplitCheck_API.pdf` | Спека REST API |
-| `SplitCheck_Architecture.pdf` | Архитектурный документ |
+| `docs/` | Документация проекта на русском (архитектура, API, модели, разработка) |
+| `SplitCheck_API.pdf` | Исходная спека REST API |
+| `SplitCheck_Architecture.pdf` | Исходный архитектурный документ |
