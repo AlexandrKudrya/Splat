@@ -1,13 +1,18 @@
-FROM python:3.12-slim
-
+# -------- build stage --------
+FROM maven:3.9.9-eclipse-temurin-21 AS build
 WORKDIR /app
 
-# Install uv for fast dependency installation
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+COPY pom.xml .
+RUN mvn -q -DskipTests dependency:go-offline
 
-COPY pyproject.toml .
-RUN uv sync --no-dev
+COPY src ./src
+RUN mvn -q -DskipTests package
 
-COPY . .
+# -------- runtime stage --------
+FROM eclipse-temurin:21-jre
+WORKDIR /app
 
-CMD ["uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app/app.jar"]

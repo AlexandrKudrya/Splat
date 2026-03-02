@@ -1,12 +1,12 @@
 services:
   db:
-    image: postgres:16-alpine
+    image: postgres:16
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: splitcheck
+      POSTGRES_DB: merilo
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - merilo_pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
@@ -16,23 +16,32 @@ services:
       retries: 5
 
   backend:
-    build: ./backend
-    env_file: .env
-    ports:
-      - "8000:8000"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: merilo-backend
+    restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
-    volumes:
-      - ./backend:/app
+    ports:
+      - "8080:8080"
+    environment:
+      # ===== Spring DB =====
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/merilo
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
 
-  bot:
-    build: ./bot
-    env_file: .env
-    depends_on:
-      - backend
-    volumes:
-      - ./bot:/app
+      # ===== Telegram =====
+      TELEGRAM_BOT_TOKEN: "8340785841:AAHZGvwO5qyt_8iQj_drFyDQEmNSbAafHG4"
+
+      # ===== JWT =====
+      JWT_SECRET: supersecretkey_32chars_minimum!!
+      JWT_EXPIRATION: 1440
+
+      # ===== Optional =====
+      SERVER_PORT: 8080
 
 volumes:
-  postgres_data:
+  merilo_pgdata:
