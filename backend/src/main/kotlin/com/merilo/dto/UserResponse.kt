@@ -1,4 +1,4 @@
-package main.kotlin.com.merilo.dto
+package com.merilo.dto
 
 
 data class UserResponse(

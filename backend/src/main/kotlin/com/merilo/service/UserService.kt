@@ -1,9 +1,9 @@
-package main.kotlin.com.merilo.service
+package com.merilo.service
 
 import jakarta.transaction.Transactional
-import main.kotlin.com.merilo.dto.UserResponse
-import main.kotlin.com.merilo.model.UserEntity
-import main.kotlin.com.merilo.repository.UserRepository
+import com.merilo.dto.UserResponse
+import com.merilo.model.UserEntity
+import com.merilo.repository.UserRepository
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service

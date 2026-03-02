@@ -1,4 +1,4 @@
-package main.kotlin.com.merilo
+package com.merilo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

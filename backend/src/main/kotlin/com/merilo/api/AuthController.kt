@@ -1,9 +1,9 @@
-package main.kotlin.com.merilo.api
+package com.merilo.api
 
-import main.kotlin.com.merilo.dto.AuthResponse
-import main.kotlin.com.merilo.dto.TelegramAuthRequest
-import main.kotlin.com.merilo.integration.telegram.TelegramInitDataVerifier
-import main.kotlin.com.merilo.service.AuthService
+import com.merilo.dto.AuthResponse
+import com.merilo.dto.TelegramAuthRequest
+import com.merilo.integration.telegram.TelegramInitDataVerifier
+import com.merilo.service.AuthService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 

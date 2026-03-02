@@ -1,4 +1,4 @@
-package main.kotlin.com.merilo.model
+package com.merilo.model
 
 import com.vladmihalcea.hibernate.type.json.JsonType
 import org.hibernate.annotations.Type

@@ -1,5 +1,6 @@
 package main.kotlin.com.merilo.config
 
+import com.merilo.config.JwtService
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -9,9 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
-/*
 
- */
 
 @Component
 class JwtAuthFilter(

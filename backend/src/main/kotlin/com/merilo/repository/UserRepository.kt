@@ -1,6 +1,6 @@
-package main.kotlin.com.merilo.repository
+package com.merilo.repository
 
-import main.kotlin.com.merilo.model.UserEntity
+import com.merilo.model.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

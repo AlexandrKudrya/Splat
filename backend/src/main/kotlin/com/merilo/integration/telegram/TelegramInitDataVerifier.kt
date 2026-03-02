@@ -1,4 +1,4 @@
-package main.kotlin.com.merilo.integration.telegram
+package com.merilo.integration.telegram
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory

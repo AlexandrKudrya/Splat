@@ -1,4 +1,4 @@
-package main.kotlin.com.merilo.config
+package com.merilo.config
 
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys

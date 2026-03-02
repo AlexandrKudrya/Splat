@@ -1,8 +1,8 @@
-package main.kotlin.com.merilo.api
+package com.merilo.api
 
-import main.kotlin.com.merilo.dto.UpdatePaymentMethodsRequest
-import main.kotlin.com.merilo.dto.UserResponse
-import main.kotlin.com.merilo.service.UserService
+import com.merilo.dto.UpdatePaymentMethodsRequest
+import com.merilo.dto.UserResponse
+import com.merilo.service.UserService
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 import org.springframework.security.core.annotation.AuthenticationPrincipal

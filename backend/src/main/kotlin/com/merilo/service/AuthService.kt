@@ -1,12 +1,12 @@
-package main.kotlin.com.merilo.service
+package com.merilo.service
 
 
 
-import main.kotlin.com.merilo.config.JwtService
-import main.kotlin.com.merilo.dto.AuthResponse
-import main.kotlin.com.merilo.integration.telegram.TelegramUser
-import main.kotlin.com.merilo.model.UserEntity
-import main.kotlin.com.merilo.repository.UserRepository
+import com.merilo.config.JwtService
+import com.merilo.dto.AuthResponse
+import com.merilo.integration.telegram.TelegramUser
+import com.merilo.model.UserEntity
+import com.merilo.repository.UserRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
