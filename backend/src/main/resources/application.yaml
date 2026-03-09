@@ -25,3 +25,16 @@ telegram:
   bot-token: "8340785841:AAHZGvwO5qyt_8iQj_drFyDQEmNSbAafHG4"
 security:
   initdata-max-age-seconds: 86400
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.boot.web.servlet.error: DEBUG
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always

@@ -10,18 +10,24 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 @RestControllerAdvice
 class ApiExceptionHandler {
 
-    data class ErrorResponse(val message: String)
+    @ExceptionHandler(NotFoundException::class)
+    fun handleNotFound(ex: NotFoundException): ResponseEntity<Map<String, String>> {
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(mapOf("error" to ex.message.orEmpty()))
+    }
 
-    @ExceptionHandler(IllegalArgumentException::class)
-    fun handleBadRequest(e: IllegalArgumentException): ResponseEntity<ErrorResponse> {
-        val msg = e.message ?: "bad request"
+    @ExceptionHandler(BadRequestException::class)
+    fun handleBadRequest(ex: BadRequestException): ResponseEntity<Map<String, String>> {
+        return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body(mapOf("error" to ex.message.orEmpty()))
+    }
 
-
-        val status = if (
-            msg.contains("signature", ignoreCase = true) ||
-            msg.contains("too old", ignoreCase = true)
-        ) HttpStatus.UNAUTHORIZED else HttpStatus.BAD_REQUEST
-
-        return ResponseEntity.status(status).body(ErrorResponse(msg))
+    @ExceptionHandler(Exception::class)
+    fun handleGeneric(ex: Exception): ResponseEntity<Map<String, String>> {
+        return ResponseEntity
+            .status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(mapOf("error" to "Internal server error"))
     }
 }

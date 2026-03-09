@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merilo</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+          font-family: sans-serif;
+          padding: 24px;
+          max-width: 700px;
+          margin: 0 auto;
+        }
+
+        button {
+          padding: 12px 16px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+
+        pre {
+          white-space: pre-wrap;
+          word-break: break-word;
+          background: #f5f5f5;
+          padding: 12px;
+          border-radius: 8px;
+          margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+<h1>Merilo Mini App</h1>
+<button id="loginBtn">Войти через Telegram</button>
+<pre id="output">Ожидание...</pre>
+
+<script>
+    const output = document.getElementById("output");
+    const loginBtn = document.getElementById("loginBtn");
+
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+
+    loginBtn.addEventListener("click", async () => {
+      try {
+        const initData = tg.initData;
+
+        if (!initData) {
+          output.textContent = "initData пустой. Скорее всего страница открыта не внутри Telegram Mini App.";
+          return;
+        }
+
+        output.textContent = "Отправляем init_data...\n\n" + initData;
+
+        const response = await fetch("/api/v1/auth/telegram", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            init_data: initData
+          })
+        });
+
+        const text = await response.text();
+        output.textContent = `Status: ${response.status}\n\n${text}`;
+
+        if (response.ok) {
+          try {
+            const json = JSON.parse(text);
+            if (json.access_token) {
+              localStorage.setItem("token", json.access_token);
+            }
+          } catch (_) {}
+        }
+      } catch (e) {
+        output.textContent = "Ошибка: " + e.message;
+      }
+    });
+</script>
+</body>
+</html>

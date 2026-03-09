@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
 
-
 @Component
 class JwtAuthFilter(
     private val jwtService: JwtService
@@ -27,7 +26,7 @@ class JwtAuthFilter(
         if (token != null && SecurityContextHolder.getContext().authentication == null) {
             try {
                 val userId = jwtService.parseUserId(token)
-
+                request.setAttribute("userId", userId)
                 val auth = UsernamePasswordAuthenticationToken(
                     userId.toString(),
                     null,
